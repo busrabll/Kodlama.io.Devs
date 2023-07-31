@@ -10,6 +10,7 @@ import kodlama.io.Kodlama.io.Devs.business.requests.CreateProgrammingLanguageReq
 import kodlama.io.Kodlama.io.Devs.business.requests.UpdateProgrammingLanguageRequest;
 import kodlama.io.Kodlama.io.Devs.business.responses.GetAllProgrammingLanguagesResponse;
 import kodlama.io.Kodlama.io.Devs.business.responses.GetByIdProgrammingLanguageResponse;
+import kodlama.io.Kodlama.io.Devs.business.rules.ProgrammingLanguageBusinessRules;
 import kodlama.io.Kodlama.io.Devs.core.utilities.mappers.ModelMapperService;
 import kodlama.io.Kodlama.io.Devs.dataAccess.abstracts.ProgrammingLanguageRepository;
 import kodlama.io.Kodlama.io.Devs.entities.concretes.ProgrammingLanguage;
@@ -21,6 +22,7 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	
 	private ProgrammingLanguageRepository programmingLanguageRepository;
 	private ModelMapperService modelMapperService;
+	private ProgrammingLanguageBusinessRules programmingLanguageBusinessRules;
 
 	@Override
 	public List<GetAllProgrammingLanguagesResponse> getAll() {
@@ -37,6 +39,8 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
 	@Override
 	public void add(CreateProgrammingLanguageRequest createProgrammingLanguageRequest) {
+		
+		this.programmingLanguageBusinessRules.checkIfProgrammingLanguageNameExists(createProgrammingLanguageRequest.getName());
 		
 		ProgrammingLanguage programmingLanguage = this.modelMapperService.forRequest().map(createProgrammingLanguageRequest, ProgrammingLanguage.class);
 		

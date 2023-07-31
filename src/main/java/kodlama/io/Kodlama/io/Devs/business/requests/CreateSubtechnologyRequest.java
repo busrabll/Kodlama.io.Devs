@@ -9,10 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateProgrammingLanguageRequest {
+public class CreateSubtechnologyRequest {
 	
 	@NotNull
 	@NotBlank
 	private String name;
-
+	
+	@NotNull
+	@NotBlank
+	private int programmingLanguageId;
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import kodlama.io.Kodlama.io.Devs.business.abstracts.ProgrammingLanguageService;
 import kodlama.io.Kodlama.io.Devs.business.requests.CreateProgrammingLanguageRequest;
 import kodlama.io.Kodlama.io.Devs.business.requests.UpdateProgrammingLanguageRequest;
@@ -40,7 +41,7 @@ public class ProgrammingLanguagesControllers {
 	
 	@PostMapping()
 	@ResponseStatus(code=HttpStatus.CREATED)
-	public void add(@RequestBody() CreateProgrammingLanguageRequest createProgrammingLanguageRequest) {
+	public void add(@RequestBody() @Valid() CreateProgrammingLanguageRequest createProgrammingLanguageRequest) {
 		this.programmingLanguageService.add(createProgrammingLanguageRequest); 
 	}
 	
